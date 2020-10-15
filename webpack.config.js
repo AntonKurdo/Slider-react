@@ -1,15 +1,17 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
+
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
   output: {
     filename: "./main.js",
-    chunkFilename: "[name].bundle.js"
+    chunkFilename: "[name].bundle.js",
+    path: path.resolve(__dirname, 'build')
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 8800,
     watchContentBase: true,
