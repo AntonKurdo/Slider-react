@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev-server": "webpack-dev-server --open",
-    "build": "webpack",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "webpack"
   },
   "author": "Anton Kurdo",
   "license": "ISC",
@@ -26,7 +24,6 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "css-loader": "^2.1.0",
     "file-loader": "^6.1.1",
-    "gh-pages": "^3.1.0",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
     "style-loader": "^0.23.1",
@@ -45,6 +42,5 @@
   },
   "optionalDependencies": {
     "mini-css-extract-plugin": "^0.5.0"
-  },
-  "homepage": "http://AntonKurdo.github.io/Slider-react"
+  }
 }

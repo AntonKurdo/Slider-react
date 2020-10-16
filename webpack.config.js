@@ -8,10 +8,10 @@ module.exports = {
   output: {
     filename: "./main.js",
     chunkFilename: "[name].bundle.js",
-    path: path.resolve(__dirname, 'build')
+    // path: path.resolve(__dirname, 'build')
   },
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 8800,
     watchContentBase: true,

@@ -13,6 +13,10 @@ export const Slider = ({
     x,
     setX
 }) => {
+
+
+
+
     const goLeft = () => {           
         x === 0
             ? setX(-100 * (sliderArr.length - 1))
@@ -39,7 +43,7 @@ export const Slider = ({
         }     
     }
     
-//////////////////////////////////////
+/// ----- SWIPES ----- ///
 
     let isSwiping = false;
     let startX = null;
@@ -60,18 +64,14 @@ export const Slider = ({
             if (e.target.className === 'content') {
                 let transformMatrix = 0;
                 diff = Math.round((e.pageX - startX) / window.innerWidth * 100);
-                if (diff > 0 && x === 0) {
-                    // console.log('diff > 0')
-                    console.log(x)
+                if ((diff < 0 && x === (sliderArr.length - 1) * -100) || (diff > 0 && x === 0)) {               
                     diff = null;
-                } else {
-                   
+                } else {                   
                     if (slide.current) {
-                        transformMatrix = window.getComputedStyle(slide.current).transform.split(',')[4].trim() / window.innerWidth * 100;                        
+                        transformMatrix = window.getComputedStyle(slide.current).transform.split(',')[4].trim() / window.innerWidth * 100;                            
                     }
-                     setX(Math.round(transformMatrix + diff));   
-                }
-                          
+                    setX(Math.round(transformMatrix + diff));             
+                }                         
             }              
         }           
     }
@@ -79,7 +79,7 @@ export const Slider = ({
     const swipeEnd = (e) => {
         if (e.target.className === 'content') {
             isSwiping = false;
-            if (diff && diff < 0) {
+            if (diff && diff < 0 && x !== (sliderArr.length - 1) * -100) {
                 setX(basicPos - 100);               
                 setState(state + 1);
                 nextDot(state)
@@ -93,28 +93,28 @@ export const Slider = ({
     }
   
 
+
     useEffect(() => {
         if (window.PointerEvent) {
             window.addEventListener('pointerdown', swipeStart);    
             window.addEventListener('pointermove', swipeMove);
             window.addEventListener('pointerup', swipeEnd);
+
+            return () =>   window.removeEventListener('pointerdown', swipeStart);  
         } else {
             window.addEventListener('mousedown', swipeStart);    
             window.addEventListener('mousemove', swipeMove);
             window.addEventListener('mouseup', swipeEnd);
-        }
-        
-        
 
-        // window.addEventListener('touchdown', swipeStart);    
-        // window.addEventListener('touchmove', swipeMove);
-        // window.addEventListener('touchup', swipeEnd);
+            window.addEventListener('touchdown', swipeStart);    
+            window.addEventListener('touchmove', swipeMove);
+            window.addEventListener('touchup', swipeEnd);
 
-        return () => {
-            window.removeEventListener('mousedown', swipeStart);     
-            window.removeEventListener('pointerdown', swipeStart);  
-            // window.removeEventListener('touchdown', swipeStart);    
-        }
+            return () => {
+                window.removeEventListener('mousedown', swipeStart);     
+                window.removeEventListener('touchdown', swipeStart);    
+            }
+        }     
     })
    
 /////////////////////////////////////////////
