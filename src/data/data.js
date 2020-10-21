@@ -1,4 +1,3 @@
-import React from 'react';
 
 
 //pics
@@ -13,4 +12,4 @@ import img5 from '../assets/5.jpg';
 
 
 
-export let sliderArr = [img1, img2, img3, img4, img5];
+export let data = [img1, img2, img3, img4, img5];
